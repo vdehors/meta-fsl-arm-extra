@@ -14,4 +14,4 @@ LOCALVERSION = "_1.1.0_ga-wandboard"
 
 COMPATIBLE_MACHINE = "(wandboard|apf6dl|apf6q)"
 
-SRC_URI_apf6_append += "file://0450-armadeus-add-apf6q-and-apf6dl-device-trees.patch"
+SRC_URI_append_apf6 += "file://0450-armadeus-add-apf6q-and-apf6dl-device-trees.patch"
