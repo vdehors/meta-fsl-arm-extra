@@ -1,17 +1,7 @@
-#@TYPE: Machine
-#@NAME: Armadeus APF6 Dev. board with SOM based on i.MX6 Quad
-#@SOC: i.MX6Q
-#@DESCRIPTION: Machine configuration for Armadeus APF6 (quad) boards
-
-include conf/machine/include/imx-base.inc
-include conf/machine/include/tune-cortexa9.inc
-
 # Armadeus patches for are based on the linux-wandboard
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-wandboard"
 PREFERRED_VERSION_linux-wandboard ?= "3.10.53"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-apf6"
-
-SOC_FAMILY = "mx6:mx6q:apf6:apf6q"
 
 SERIAL_CONSOLE = "115200 ttymxc3"
 
@@ -20,6 +10,3 @@ MACHINE_FEATURES += "wifi pci touchscreen"
 KERNEL_IMAGETYPE = "zImage"
 
 UBOOT_MACHINE = "apf6_config"
-
-KERNEL_DEVICETREE = "imx6q-apf6dev.dtb"
-
