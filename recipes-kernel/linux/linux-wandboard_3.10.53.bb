@@ -14,4 +14,7 @@ LOCALVERSION = "_1.1.0_ga-wandboard"
 
 COMPATIBLE_MACHINE = "(wandboard|apf6dl|apf6q)"
 
-SRC_URI_append_apf6 += "file://0450-armadeus-add-apf6q-and-apf6dl-device-trees.patch"
+SRC_URI_append_apf6 += "file://0450-armadeus-add-apf6q-and-apf6dl-device-trees.patch \
+                        file://0504-armadeus-add_sx8674_touchscreen_driver.patch \
+                        file://0505-armadeus-add_mcp7940x_rtc_driver.patch "
+
