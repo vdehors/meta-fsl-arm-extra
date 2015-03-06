@@ -22,13 +22,19 @@ echo "NVS file : /lib/firmware/ti-connectivity/wl1271-nvs.bin"
 
 echo "Loading driver..."
 modprobe wl12xx
+sleep 3
 modprobe wlcore_sdio
+sleep 3
 
 echo "Calibrating..."
 calibrator plt calibrate dual
+sleep 3
+
+# Workarround for rfkill
+rfkill unblock wifi
 
 echo "Reseting..."
-echo 40 > /sys/class/gpio/export
+echo 40 > /sys/class/gpio/export 2> /dev/null || true
 echo out > /sys/class/gpio/gpio40/direction
 echo 1 > /sys/class/gpio/gpio40/value
 
