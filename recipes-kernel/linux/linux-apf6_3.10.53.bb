@@ -19,7 +19,8 @@ COMPATIBLE_MACHINE = "(apf6dl|apf6q)"
 
 SRC_URI = "git://github.com/wandboard-org/linux.git;branch=${SRCBRANCH} \
            file://defconfig \
-           file://0450-armadeus-add-apf6q-and-apf6dl-device-trees.patch \
+           file://0001-add-imx6-dtb-for-dual-and-quad-apf6.patch \
+           file://0002-decrease-pcie_set_read_rq-size-from-4096-to-256.patch \
            file://0504-armadeus-add_sx8674_touchscreen_driver.patch \
            file://0505-armadeus-add_mcp7940x_rtc_driver.patch "
 
