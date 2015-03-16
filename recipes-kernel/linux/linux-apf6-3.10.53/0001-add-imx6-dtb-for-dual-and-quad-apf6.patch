@@ -282,7 +282,7 @@ index 0000000..a810e9b
 +		disp_dev = "lcd";
 +		interface_pix_fmt = "RGB666";
 +		mode_str ="SEIKO-WVGA";
-+		default_bpp = <16>;
++		default_bpp = <18>;
 +		int_clk = <0>;
 +		late_init = <0>;
 +		status = "okay";
