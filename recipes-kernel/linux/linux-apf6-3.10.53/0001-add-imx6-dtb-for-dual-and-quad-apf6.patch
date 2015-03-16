@@ -1,7 +1,54 @@
-Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6q-apf6dev.dts
-===================================================================
+From 354ce3d246a1b190004f3b72629d1f5356efac1f Mon Sep 17 00:00:00 2001
+From: Mallory Daries <mallory.daries@openwide.fr>
+Date: Tue, 10 Mar 2015 14:00:35 +0100
+Subject: [PATCH 1/2] add imx6 dtb for dual and quad apf6
+
+---
+ arch/arm/boot/dts/imx6dl-apf6dev.dts   |  24 ++
+ arch/arm/boot/dts/imx6q-apf6dev.dts    |  30 ++
+ arch/arm/boot/dts/imx6qdl-apf6.dtsi    | 132 +++++++++
+ arch/arm/boot/dts/imx6qdl-apf6dev.dtsi | 507 +++++++++++++++++++++++++++++++++
+ 4 files changed, 693 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx6dl-apf6dev.dts
+ create mode 100644 arch/arm/boot/dts/imx6q-apf6dev.dts
+ create mode 100644 arch/arm/boot/dts/imx6qdl-apf6.dtsi
+ create mode 100644 arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
+
+diff --git a/arch/arm/boot/dts/imx6dl-apf6dev.dts b/arch/arm/boot/dts/imx6dl-apf6dev.dts
+new file mode 100644
+index 0000000..a875115
 --- /dev/null
-+++ linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6q-apf6dev.dts
++++ b/arch/arm/boot/dts/imx6dl-apf6dev.dts
+@@ -0,0 +1,24 @@
++/*
++ * Copyright 2015 Armadeus Systems
++ *
++ * Author: Armadeus Systems <support@armadeus.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ */
++
++/dts-v1/;
++#include "imx6dl.dtsi"
++#include "imx6qdl-apf6.dtsi"
++#include "imx6qdl-apf6dev.dtsi"
++
++/ {
++	model = "Armadeus APF6 i.MX6 Dual Lite Module on APF6Dev Board";
++	compatible = "armadeus,imx6dl-apf6dev", "armadeus,imx6dl-apf6", "fsl,imx6dl";
++
++	memory {
++		reg = <0x10000000 0x40000000>;
++	};
++};
+diff --git a/arch/arm/boot/dts/imx6q-apf6dev.dts b/arch/arm/boot/dts/imx6q-apf6dev.dts
+new file mode 100644
+index 0000000..7d63a14
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6q-apf6dev.dts
 @@ -0,0 +1,30 @@
 +/*
 + * Copyright 2015 Armadeus Systems
@@ -28,15 +75,16 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6q-apf6dev.d
 +	};
 +};
 +
-+/*
++
 +&sata {
 +	status = "okay";
 +};
-+*/
-Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6.dtsi
-===================================================================
++
+diff --git a/arch/arm/boot/dts/imx6qdl-apf6.dtsi b/arch/arm/boot/dts/imx6qdl-apf6.dtsi
+new file mode 100644
+index 0000000..9932d73
 --- /dev/null
-+++ linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-apf6.dtsi
 @@ -0,0 +1,132 @@
 +/*
 + * Copyright 2015 Armadeus Systems
@@ -170,11 +218,12 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6.dt
 +		};
 +	};
 +};
-Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
-===================================================================
+diff --git a/arch/arm/boot/dts/imx6qdl-apf6dev.dtsi b/arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
+new file mode 100644
+index 0000000..a810e9b
 --- /dev/null
-+++ linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
-@@ -0,0 +1,486 @@
++++ b/arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
+@@ -0,0 +1,507 @@
 +/*
 + * Copyright 2015 Armadeus Systems
 + *
@@ -188,7 +237,7 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +
 +/ {
 +	aliases {
-+		mxcfb0 = &mxcfb1;
++		mxcfb0 = &mxcfb3;
 +	};
 +
 +	gpio-keys {
@@ -216,7 +265,7 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +			default-state = "on";
 +		};
 +	};
-+
++/*
 +	mxcfb1: fb@0 {
 +		compatible = "fsl,mxc_sdc_fb";
 +		disp_dev = "hdmi";
@@ -226,6 +275,35 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +		int_clk = <0>;
 +		late_init = <0>;
 +		status = "okay";
++	};
++*/
++
++	mxcfb3: fb@2 {
++		compatible = "fsl,mxc_sdc_fb";
++		disp_dev = "lcd";
++		interface_pix_fmt = "RGB24";
++		mode_str ="SEIKO-WVGA";
++		default_bpp = <24>;
++		int_clk = <0>;
++		late_init = <0>;
++		status = "okay";
++	};
++
++	lcd@0 {
++		compatible = "fsl,lcd";
++		ipu_id = <0>;
++		disp_id = <0>;
++		default_ifmt = "RGB24";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_ipu1>;
++		status = "okay";
++	};
++
++	backlight_lcd {
++		compatible = "pwm-backlight";
++		pwms = <&pwm3 0 191000>;
++		brightness-levels = <255 128 64 32 16 8 4 0>;
++		default-brightness-level = <3>;
 +	};
 +
 +	sound {
@@ -248,13 +326,14 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +		spdif-controller = <&spdif>;
 +		spdif-out;
 +	};
-+
++/*
 +	sound-hdmi {
 +		compatible = "fsl,imx6q-audio-hdmi",
 +			   "fsl,imx-audio-hdmi";
 +		model = "imx-audio-hdmi";
 +		hdmi-controller = <&hdmi_audio>;
 +	};
++*/
 +
 +	regulators {
 +		compatible = "simple-bus";
@@ -327,7 +406,7 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +		   <&gpio4 11 GPIO_ACTIVE_HIGH>;
 +	status = "okay";
 +};
-+
++/*
 +&hdmi_audio {
 +	status = "okay";
 +};
@@ -343,37 +422,40 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +	fsl,phy_reg_cksymtx = <0x800d>;
 +	status = "okay";
 +};
++*/
 +
 +&i2c1 {
++	clock-frequency = <400000>;
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_i2c1>;
-+	clock-frequency = <100000>;
 +	status = "okay";
 +
-+	ov5640_mipi: ov5640_mipi@3c {
-+		compatible = "ovti,ov5640_mipi";
++	touchscreen@48 {
++		compatible = "semtech,sx8654";
++		reg = <0x48>;
 +		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_camera_ov5640>;
-+		reg = <0x3c>;
-+		clocks = <&clks 201>;
-+		clock-names = "csi_mclk";
-+		pwn-gpios = <&gpio5 20 GPIO_ACTIVE_HIGH>;
-+		rst-gpios = <&gpio5 19 GPIO_ACTIVE_LOW>;
-+		DOVDD-supply = <&reg_1p8v>;
-+		AVDD-supply = <&reg_2p5v>;
-+		DVDD-supply = <&reg_1p8v>;
-+		ipu_id = <0>;
-+		csi_id = <0>;
-+		mclk = <24000000>;
-+		mclk_source = <0>;
++		pinctrl-0 = <&pinctrl_touchscreen>;
++		interrupt-parent = <&gpio6>;
++		interrupts = <3 IRQ_TYPE_EDGE_FALLING>;
++		x-plate-ohms = <1100>;
++		y-plate-ohms = <500>;
++		min-x = <0>;
++		max-x = <800>;
++		min-y = <0>;
++		max-y = <480>;
 +	};
 +};
 +
 +&i2c2 {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_i2c2>;
-+	clock-frequency = <100000>;
++	clock-frequency = <400000>;
 +	status = "okay";
++
++	rtc@6f {
++		compatible = "microchip,mcp7940x-rtc";
++		reg = <0x6F>;
++	};
 +
 +	codec: sgtl5000@0a {
 +		compatible = "fsl,sgtl5000";
@@ -381,7 +463,7 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +		clocks = <&clks 201>;
 +		VDDA-supply = <&reg_3p3v>;
 +		VDDIO-supply = <&reg_3p3v>;
-+       };
++	};
 +};
 +
 +&i2c3 {
@@ -389,11 +471,12 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +	pinctrl-0 = <&pinctrl_i2c3>;
 +	clock-frequency = <400000>;
 +	status = "okay";
-+
++/*
 +	hdmi: edid@50 {
 +		compatible = "fsl,imx6-hdmi-i2c";
 +		reg = <0x50>;
 +	};
++*/
 +};
 +
 +&mipi_csi {
@@ -404,18 +487,17 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +	status = "okay";
 +};
 +
-+/*
++
 +&pcie {
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_pcie>;
 +	reset-gpio = <&gpio6 2 GPIO_ACTIVE_HIGH>;
 +	status = "okay";
 +};
-+*/
 +
 +&pwm3 {
 +	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_pwm3>;
++	pinctrl-0 = <&pinctrl_pwm3_1>;
 +	status = "okay";
 +};
 +
@@ -498,6 +580,34 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +			>;
 +		};
 +
++		pinctrl_ipu1: ipu1grp-1 {
++			fsl,pins = <
++				MX6QDL_PAD_DI0_DISP_CLK__IPU1_DI0_DISP_CLK 0x10
++				MX6QDL_PAD_DI0_PIN15__IPU1_DI0_PIN15       0x10
++				MX6QDL_PAD_DI0_PIN2__IPU1_DI0_PIN02        0x10
++				MX6QDL_PAD_DI0_PIN3__IPU1_DI0_PIN03        0x10
++				MX6QDL_PAD_DI0_PIN4__IPU1_DI0_PIN04        0x80000000
++				MX6QDL_PAD_DISP0_DAT0__IPU1_DISP0_DATA00   0x10
++				MX6QDL_PAD_DISP0_DAT1__IPU1_DISP0_DATA01   0x10
++				MX6QDL_PAD_DISP0_DAT2__IPU1_DISP0_DATA02   0x10
++				MX6QDL_PAD_DISP0_DAT3__IPU1_DISP0_DATA03   0x10
++				MX6QDL_PAD_DISP0_DAT4__IPU1_DISP0_DATA04   0x10
++				MX6QDL_PAD_DISP0_DAT5__IPU1_DISP0_DATA05   0x10
++				MX6QDL_PAD_DISP0_DAT6__IPU1_DISP0_DATA06   0x10
++				MX6QDL_PAD_DISP0_DAT7__IPU1_DISP0_DATA07   0x10
++				MX6QDL_PAD_DISP0_DAT8__IPU1_DISP0_DATA08   0x10
++				MX6QDL_PAD_DISP0_DAT9__IPU1_DISP0_DATA09   0x10
++				MX6QDL_PAD_DISP0_DAT10__IPU1_DISP0_DATA10  0x10
++				MX6QDL_PAD_DISP0_DAT11__IPU1_DISP0_DATA11  0x10
++				MX6QDL_PAD_DISP0_DAT12__IPU1_DISP0_DATA12  0x10
++				MX6QDL_PAD_DISP0_DAT13__IPU1_DISP0_DATA13  0x10
++				MX6QDL_PAD_DISP0_DAT14__IPU1_DISP0_DATA14  0x10
++				MX6QDL_PAD_DISP0_DAT15__IPU1_DISP0_DATA15  0x10
++				MX6QDL_PAD_DISP0_DAT16__IPU1_DISP0_DATA16  0x10
++				MX6QDL_PAD_DISP0_DAT17__IPU1_DISP0_DATA17  0x10
++			>;
++		};
++
 +		pinctrl_ecspi1: ecspi1grp {
 +			fsl,pins = <
 +				MX6QDL_PAD_KEY_COL1__ECSPI1_MISO 0x100b1
@@ -529,12 +639,6 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +
 +		pinctrl_gpios: gpiosgrp {
 +			fsl,pins = <
-+				MX6QDL_PAD_DISP0_DAT18__GPIO5_IO12      0x80000000
-+				MX6QDL_PAD_DISP0_DAT19__GPIO5_IO13      0x80000000
-+				MX6QDL_PAD_DISP0_DAT20__GPIO5_IO14      0x80000000
-+				MX6QDL_PAD_DISP0_DAT21__GPIO5_IO15      0x80000000
-+				MX6QDL_PAD_DISP0_DAT22__GPIO5_IO16      0x80000000
-+				MX6QDL_PAD_DISP0_DAT23__GPIO5_IO17      0x80000000
 +				MX6QDL_PAD_CSI0_PIXCLK__GPIO5_IO18      0x80000000
 +				MX6QDL_PAD_CSI0_VSYNC__GPIO5_IO21       0x80000000
 +			>;
@@ -568,43 +672,9 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +			>;
 +		};
 +
-+		pinctrl_ipu1_disp1: ipu1disp1grp {
-+			fsl,pins = <
-+				MX6QDL_PAD_DI0_DISP_CLK__IPU1_DI0_DISP_CLK 0x10
-+				MX6QDL_PAD_DI0_PIN15__IPU1_DI0_PIN15       0x10
-+				MX6QDL_PAD_DI0_PIN2__IPU1_DI0_PIN02        0x10
-+				MX6QDL_PAD_DI0_PIN3__IPU1_DI0_PIN03        0x10
-+				MX6QDL_PAD_DI0_PIN4__IPU1_DI0_PIN04        0x80000000
-+				MX6QDL_PAD_DISP0_DAT0__IPU1_DISP0_DATA00   0x10
-+				MX6QDL_PAD_DISP0_DAT1__IPU1_DISP0_DATA01   0x10
-+				MX6QDL_PAD_DISP0_DAT2__IPU1_DISP0_DATA02   0x10
-+				MX6QDL_PAD_DISP0_DAT3__IPU1_DISP0_DATA03   0x10
-+				MX6QDL_PAD_DISP0_DAT4__IPU1_DISP0_DATA04   0x10
-+				MX6QDL_PAD_DISP0_DAT5__IPU1_DISP0_DATA05   0x10
-+				MX6QDL_PAD_DISP0_DAT6__IPU1_DISP0_DATA06   0x10
-+				MX6QDL_PAD_DISP0_DAT7__IPU1_DISP0_DATA07   0x10
-+				MX6QDL_PAD_DISP0_DAT8__IPU1_DISP0_DATA08   0x10
-+				MX6QDL_PAD_DISP0_DAT9__IPU1_DISP0_DATA09   0x10
-+				MX6QDL_PAD_DISP0_DAT10__IPU1_DISP0_DATA10  0x10
-+				MX6QDL_PAD_DISP0_DAT11__IPU1_DISP0_DATA11  0x10
-+				MX6QDL_PAD_DISP0_DAT12__IPU1_DISP0_DATA12  0x10
-+				MX6QDL_PAD_DISP0_DAT13__IPU1_DISP0_DATA13  0x10
-+				MX6QDL_PAD_DISP0_DAT14__IPU1_DISP0_DATA14  0x10
-+				MX6QDL_PAD_DISP0_DAT15__IPU1_DISP0_DATA15  0x10
-+				MX6QDL_PAD_DISP0_DAT16__IPU1_DISP0_DATA16  0x10
-+				MX6QDL_PAD_DISP0_DAT17__IPU1_DISP0_DATA17  0x10
-+			>;
-+		};
-+
 +		pinctrl_pcie: pciegrp {
 +			fsl,pins = <
 +				MX6QDL_PAD_CSI0_DAT16__GPIO6_IO02 0x80000000
-+			>;
-+		};
-+
-+		pinctrl_pwm3: pwm3grp {
-+			fsl,pins = <
-+				MX6QDL_PAD_SD4_DAT1__PWM3_OUT 0x1b0b1
 +			>;
 +		};
 +
@@ -661,32 +731,6 @@ Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6qdl-apf6dev
 +		};
 +	};
 +};
-Index: linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6dl-apf6dev.dts
-===================================================================
---- /dev/null
-+++ linux-wandboard_imx_3.10.31_1.1.0_beta2/arch/arm/boot/dts/imx6dl-apf6dev.dts
-@@ -0,0 +1,24 @@
-+/*
-+ * Copyright 2015 Armadeus Systems
-+ *
-+ * Author: Armadeus Systems <support@armadeus.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License version 2 as
-+ * published by the Free Software Foundation.
-+ *
-+ */
-+
-+/dts-v1/;
-+#include "imx6dl.dtsi"
-+#include "imx6qdl-apf6.dtsi"
-+#include "imx6qdl-apf6dev.dtsi"
-+
-+/ {
-+	model = "Armadeus APF6 i.MX6 Dual Lite Module on APF6Dev Board";
-+	compatible = "armadeus,imx6dl-apf6dev", "armadeus,imx6dl-apf6", "fsl,imx6dl";
-+
-+	memory {
-+		reg = <0x10000000 0x40000000>;
-+	};
-+};
+-- 
+1.9.1
+
